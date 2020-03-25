@@ -11,6 +11,8 @@ public class AddProductResponse {
         this.errorMessage = errorMessage;
     }
 
+
+
     public boolean isSuccess() {
         return success;
     }
