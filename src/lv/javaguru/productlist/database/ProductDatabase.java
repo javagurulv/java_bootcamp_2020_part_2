@@ -1,4 +1,6 @@
-package lesson15;
+package lv.javaguru.productlist.database;
+
+import lv.javaguru.productlist.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;

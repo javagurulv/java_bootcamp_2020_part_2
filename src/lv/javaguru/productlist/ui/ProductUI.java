@@ -1,4 +1,10 @@
-package lesson15;
+package lv.javaguru.productlist.ui;
+
+import lv.javaguru.productlist.businesslogic.AddProductResponse;
+import lv.javaguru.productlist.businesslogic.validation.ProductValidator;
+import lv.javaguru.productlist.database.ProductDatabase;
+import lv.javaguru.productlist.domain.Product;
+import lv.javaguru.productlist.businesslogic.ProductService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +13,8 @@ public class ProductUI {
 
     public static void main(String[] args) {
         ProductDatabase database = new ProductDatabase();
-        ProductService productService = new ProductService(database);
+        ProductValidator productValidator = new ProductValidator();
+        ProductService productService = new ProductService(database, productValidator);
 
         while (true) {
             // print menu
@@ -26,14 +33,18 @@ public class ProductUI {
                 // add new product
                 System.out.println("Enter product name:");
                 String productName = sc.nextLine();
-                Product product = new Product(productName);
+                System.out.println("Enter product description:");
+                String productDescription = sc.nextLine();
+                Product product = new Product(productName, productDescription);
                 // invoke BL
                 AddProductResponse response = productService.addProduct(product);
                 if (response.isSuccess()) {
                     System.out.println("Operation successful!");
                 } else {
                     System.out.println("Operation failed!");
-                    System.out.println("Error message: " + response.getErrorMessage());
+                    List<String> errors = response.getErrorMessages();
+                    errors.forEach(error ->
+                            System.out.println("Error message: " + error));
                 }
             }
 
