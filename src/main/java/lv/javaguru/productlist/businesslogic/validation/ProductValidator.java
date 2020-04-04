@@ -11,10 +11,8 @@ public class ProductValidator {
 
     private List<ProductValidationRule> validationRules;
 
-    public ProductValidator() {
-        validationRules = new ArrayList<>();
-        validationRules.add(new ProductNameValidationRule());
-        validationRules.add(new ProductDescriptionValidationRule());
+    public ProductValidator(List<ProductValidationRule> rules) {
+        validationRules = rules;
     }
 
     public ProductValidationResponse validate(Product product) {

@@ -4,6 +4,7 @@ import lv.javaguru.productlist.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductDatabase {
     private int currentID = 1;
@@ -17,6 +18,12 @@ public class ProductDatabase {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public Optional<Product> findProductByName(String productName) {
+        return products.stream()
+                .filter(product -> product.getName().equals(productName))
+                .findFirst();
     }
 
 }

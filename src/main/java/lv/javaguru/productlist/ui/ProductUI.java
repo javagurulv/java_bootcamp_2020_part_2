@@ -11,11 +11,13 @@ import java.util.Scanner;
 
 public class ProductUI {
 
-    public static void main(String[] args) {
-        ProductDatabase database = new ProductDatabase();
-        ProductValidator productValidator = new ProductValidator();
-        ProductService productService = new ProductService(database, productValidator);
+    private ProductService productService;
 
+    public ProductUI(ProductService productService) {
+        this.productService = productService;
+    }
+
+    public void executeProgram() {
         while (true) {
             // print menu
             System.out.println("Program menu:");
